@@ -180,31 +180,36 @@
                 [imageView setImage:(UIImage *)[aImageUrls objectAtIndex:i]];
             } else if([[aImageUrls objectAtIndex:i] isKindOfClass:[NSString class]] ||
                       [[aImageUrls objectAtIndex:i] isKindOfClass:[NSURL class]]) {
-                // Instantiate and show Actvity Indicator
-                UIActivityIndicatorView *activityIndicator = [UIActivityIndicatorView new];
-                activityIndicator.center = (CGPoint){_scrollView.frame.size.width/2, _scrollView.frame.size.height/2};
-                activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-                [imageView addSubview:activityIndicator];
-                [activityIndicator startAnimating];
-                [_activityIndicators setObject:activityIndicator forKey:[NSString stringWithFormat:@"%d", i]];
-                
-                // Asynchronously retrieve image
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                    NSData *imageData = [NSData dataWithContentsOfURL:
-                                         [[aImageUrls objectAtIndex:i] isKindOfClass:[NSURL class]]?
-                                         [aImageUrls objectAtIndex:i]:
-                                         [NSURL URLWithString:(NSString *)[aImageUrls objectAtIndex:i]]];
-                    dispatch_sync(dispatch_get_main_queue(), ^{
-                        [imageView setImage:[UIImage imageWithData:imageData]];
-
-                        // Stop and Remove Activity Indicator
-                        UIActivityIndicatorView *indicatorView = (UIActivityIndicatorView *)[_activityIndicators objectForKey:[NSString stringWithFormat:@"%d", i]];
-                        if (indicatorView) {
-                            [indicatorView stopAnimating];
-                            [_activityIndicators removeObjectForKey:[NSString stringWithFormat:@"%d", i]];
-                        }
+                NSURL *imageURL = [[aImageUrls objectAtIndex:i] isKindOfClass:[NSURL class]]?
+                [aImageUrls objectAtIndex:i]:
+                [NSURL URLWithString:(NSString *)[aImageUrls objectAtIndex:i]];
+                if([_dataSource respondsToSelector:@selector(initializeImageView:withURL:)]) {
+                    [_dataSource initializeImageView:imageView
+                                             withURL:imageURL];
+                } else {
+                    // Instantiate and show Actvity Indicator
+                    UIActivityIndicatorView *activityIndicator = [UIActivityIndicatorView new];
+                    activityIndicator.center = (CGPoint){_scrollView.frame.size.width/2, _scrollView.frame.size.height/2};
+                    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+                    [imageView addSubview:activityIndicator];
+                    [activityIndicator startAnimating];
+                    [_activityIndicators setObject:activityIndicator forKey:[NSString stringWithFormat:@"%d", i]];
+                    
+                    // Asynchronously retrieve image
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            [imageView setImage:[UIImage imageWithData:imageData]];
+                            
+                            // Stop and Remove Activity Indicator
+                            UIActivityIndicatorView *indicatorView = (UIActivityIndicatorView *)[_activityIndicators objectForKey:[NSString stringWithFormat:@"%d", i]];
+                            if (indicatorView) {
+                                [indicatorView stopAnimating];
+                                [_activityIndicators removeObjectForKey:[NSString stringWithFormat:@"%d", i]];
+                            }
+                        });
                     });
-                });
+                }
             }
             
             // Add GestureRecognizer to ImageView

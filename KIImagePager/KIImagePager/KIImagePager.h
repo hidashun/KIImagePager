@@ -21,6 +21,7 @@
 - (UIImage *) placeHolderImageForImagePager;
 - (NSString *) captionForImageAtIndex:(NSUInteger)index;
 - (UIViewContentMode) contentModeForPlaceHolder;
+- (void) initializeImageView:(UIImageView *)imageView withURL:(NSURL *)url;
 
 @end
 
@@ -29,7 +30,6 @@
 @optional
 - (void) imagePager:(KIImagePager *)imagePager didScrollToIndex:(NSUInteger)index;
 - (void) imagePager:(KIImagePager *)imagePager didSelectImageAtIndex:(NSUInteger)index;
-
 @end
 
 @interface KIImagePager : UIView

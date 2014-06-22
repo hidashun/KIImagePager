@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>5F39D364-703D-4B74-8648-E0CEC83F43B8</string>
+	<string>0D3C08CC-CC1A-461E-8BF9-265A573E6625</string>
 	<key>IDESourceControlProjectName</key>
 	<string>KIImagePager</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>2666B39A-FDB4-4B7F-988A-9B0FACD51312</key>
-		<string>ssh://github.com/kimar/KIImagePager</string>
+		<key>8FE0A9AB-EA8D-4952-A8DA-3A07108BAC2D</key>
+		<string>ssh://github.com/hidashun/KIImagePager.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>KIImagePager.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>2666B39A-FDB4-4B7F-988A-9B0FACD51312</key>
+		<key>8FE0A9AB-EA8D-4952-A8DA-3A07108BAC2D</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/kimar/KIImagePager</string>
+	<string>ssh://github.com/hidashun/KIImagePager.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>2666B39A-FDB4-4B7F-988A-9B0FACD51312</string>
+	<string>8FE0A9AB-EA8D-4952-A8DA-3A07108BAC2D</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>2666B39A-FDB4-4B7F-988A-9B0FACD51312</string>
+			<string>8FE0A9AB-EA8D-4952-A8DA-3A07108BAC2D</string>
 			<key>IDESourceControlWCCName</key>
 			<string>KIImagePager</string>
 		</dict>
